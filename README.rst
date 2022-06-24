@@ -1,7 +1,7 @@
 .. image:: https://img.shields.io/badge/pstn--026-lsst.io-brightgreen.svg
    :target: https://pstn-026.lsst.io
-.. image:: https://travis-ci.com/lsst-pst/pstn-026.svg
-   :target: https://travis-ci.com/lsst-pst/pstn-026
+.. image:: https://github.com/lsst-pst/pstn-026/workflows/CI/badge.svg
+   :target: https://github.com/lsst-pst/pstn-026/actions/
 
 #######################################
 LSST Calibration Strategy and Pipelines
