@@ -1,40 +1,127 @@
 \section{Introduction}
 
-LSST overview paper: \cite{2008arXiv0805.2366I}
+The introduction should describe the science drivers for  the Rubin LSST calibration requirements.
+
+Papers to reference might include  the LSST overview paper, \cite{2008arXiv0805.2366I} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{LSST Calibration Strategy Overview}
 
+Description of the high level strategy for LSST calibration. 
+The strategy is based around directly measuring the system throughput as a function of wavelength, focal plane position, and time. 
+Describe the a) Components of the calibration system, b) Measuring the System throughput, c) Characterizing the atmosphere.
+
+References might include, e.g.  \cite{2017PASP..129k4502B}.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Instrument Signature Removal}
- 
+
 \subsection{Overview}
+Mention that snap combine, if it happens, will happen as part if ISR. 
+Details will be forthcoming. 
+Sections should describe inputs, outputs, how they are obtained and all units.
+Introduction should make clear that we are trying to reverse the order of the physical/electronic processes that affect our images, and get from a “raw” (what comes out of the electronics) to an image that represents how many photoelectrons were created in each pixel on the detector.
+
+ 
 \subsection{Differential Non-linearity Correction}
+Including how we get DNL look-up tables.
+
+Output units ADU.
+
+
 \subsection{Overscan Correction}
+Output units ADU.
+
 \subsection{Bias Subtraction}
+Including how to get combined bias.
+
+Output units ADU.
+
 \subsection{CTI Correction}
+Including how to get the CTI calibration file.
+
+Output units ADU.
+
 \subsection{Linearity Correction}
+Including how to get the linearity table.
+
+Output units ADU.
+
 \subsection{Gain Normalization}
+Including how to get PTC input.
+This step converts from ADU to electrons and normalizes the gain to 1.0.
+
+Output units electrons.
+
 \subsection{Variance Plane Creation}
+Including how to get read noise measurement from PTC.
+
+Output units electrons.
+
 \subsection{Crosstalk Correction}
+Including how to measure the crosstalk matrix.
+
+Output units electrons.
+
 \subsection{Defect Mask and Interpolation}
+Including how to get the defect map.
+
+Output units electrons.
+
 \subsection{Brighter/Fatter Correction}
+Including how to get BF kernels.
+
+Output units electrons.
+
 \subsection{Dark Subtraction}
+Including how to get combined darks.
+
+Output units electrons.
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Illumination Corrections}
+An introduction to the painful and flawed art of flat fielding.
 
 \subsection{Overview}
+Explain why do we do “flat fields”. 
+We need to flatten the background as best we can.
+We want to know how our instrument responds to focused light. 
+We want to correct for small-scale changes in quantum efficiency (including dust shadows).
+At the same time, we do not want to introduce extra signal that comes from the way we do flat-field screen illumination.  
+
+
 \subsection{Background Flat Fields}
+Describe the equations of the background flat (response to unfocused light) that makes up the image and sky background.  
+Describe how to synthesize a background flat from monochromatic flats and a reference sky SED.
+
+Output is surface brightness image.
+
 \subsection{Reference Flux Flat Fields}
+Describe the equations of the reference flux flat (response to focused light).  
+Describe how to synthesize a reference flux flat from monochromatic flats and either a) the CBP or b) a dense dithered star field.  
+Discuss the pros and cons of a) vs. b).
+Also discuss how to remove the effects of lateral electric field distortions, which we do not want in the reference flux flat (including tree rings, picture frame, midline break, etc.
+
+Output is a fluence image.
+
 \subsection{Dust Flat Fields}
+Describe how to use white light (1-2 LED) dome flats to find QE variations due to dust, and to create a simple dust flat that is just 1.0s with divots due to dust.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Background Subtraction}
 
 \subsection{Overview}
+
 \subsection{Full Focal Plane Backgrounds}
+Describe how to do full focal plane background subtraction. 
+Describe the goals;  to remove impact of sky, zodiacal light, terrestrial light, etc.
+This is performed after dividing by the background flat, which is then re-multiplied.
+
 \subsection{Fringe Subtraction}
+Describe how to do multicomponent fringe subtraction.
+Includes how to compute fringe PCAs.
+This is performed with the full focal plane background.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{From Background Subtracted Fluence Image to Pre-Calibrated Exposure}
@@ -43,8 +130,7 @@ LSST overview paper: \cite{2008arXiv0805.2366I}
 
 \subsection{Initial PSF Model}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Morphological Cosmic Ray Finding and Interpolation}
+\subsection{Morphological Cosmic Ray Finding and Interpolation}
 
 \subsection{Initial Astrometric Fit}
 
@@ -54,17 +140,28 @@ LSST overview paper: \cite{2008arXiv0805.2366I}
 \section{Photometric Calibration}
 
 \subsection{Determination}
+Separate sub-section on how to compute instrumental throughputs from monochromatic flats.
+Covers FGCM outline, as well as AuxTel atmospheric parameter input (TBD how best to combine auxtel + photometric atmospheric determination). 
+The AuxTel reduction, analysis, etc, is a separate set of papers - these should be referenced here \cite{pstn-028}, \cite{pstn-027}.
+
+Describe how to use the reference star network.
+
+Describe the output products: spatially varying zeropoints and per-detector $S\_obs(\lambda)$.
 
 \subsection{Application}
-
+Coadding transmission curves per-cell. 
+Describe how to apply chromatic corrections using an SED + $S\_obs,c(\lambda)$, i.e the coadded transmission curve per cell.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Astrometric Calibration}
 
 \subsection{Instrumental Model}
+Dense dithered star-field (ugrizy) with GBDES to compute the per-detector instrumental astrometric model.
 
 \subsection{Per-Detector WCS}
+Describe the use of GBDES, with instrumental model and Gaia DR3(+) to compute the per-epoch instrumental model, per-star proper motions, and per-detector WCS.
+
 
 
 
